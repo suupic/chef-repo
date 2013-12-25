@@ -32,13 +32,6 @@ yum_package "jenkins" do
   end
 end
 
-#bash "download_jenkins_plugin_gradle" do
-#  code <<-EOH
-#    wget -O /var/lib/jenkins/plugins/gradle.hpi http://updates.jenkins-ci.org/latest/gradle.hpi --no-check-certificate
-#  EOH
-#  action :run
-#end
-
 plugins.each do |plugin|
   local="#{plugin_path}/#{plugin}.hpi"
   remote="#{plugin_repo}/#{plugin}.hpi"
