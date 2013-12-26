@@ -1,8 +1,10 @@
 #
-# Cookbook Name:: tengine
-# Recipe:: default
+# Cookbook Name:: nginx
+# Recipe:: commons
 #
-# Copyright 2013, skywalker
+# Author:: AJ Christensen <aj@junglist.gen.nz>
+#
+# Copyright 2008-2013, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,11 +19,6 @@
 # limitations under the License.
 #
 
-TENGINE_NAME = "tengine-#{node["tengine"]["version"]}"
-TENGINE_TAR = "#{TENGINE_NAME}.tar.gz"
-TENGINE_TAR_URL = "http://tengine.taobao.org/download/#{TENGINE_TAR}"
-
-remote_file "/tmp/#{TENGINE_TAR}" do
-  source TENGINE_TAR_URL
-  mode "0644"
-end
+include_recipe 'nginx::commons_dir'
+include_recipe 'nginx::commons_script'
+include_recipe 'nginx::commons_conf'
