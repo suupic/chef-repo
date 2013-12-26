@@ -26,6 +26,13 @@ directory node['nginx']['dir'] do
   recursive true
 end
 
+directory node['nginx']['script_dir'] do
+  owner     'root'
+  group     'root'
+  mode      '0755'
+  recursive true
+end
+
 directory node['nginx']['log_dir'] do
   mode      '0755'
   owner     node['nginx']['user']

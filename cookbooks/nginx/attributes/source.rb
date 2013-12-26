@@ -22,7 +22,7 @@
 include_attribute 'nginx::default'
 
 default['nginx']['source']['version']                 = node['nginx']['version']
-default['nginx']['source']['prefix']                  = "/opt/nginx-#{node['nginx']['source']['version']}"
+default['nginx']['source']['prefix']                  = node['nginx']['dir']
 default['nginx']['source']['conf_path']               = "#{node['nginx']['dir']}/nginx.conf"
 default['nginx']['source']['sbin_path']               = "#{node['nginx']['source']['prefix']}/sbin/nginx"
 default['nginx']['source']['default_configure_flags'] = %W[
@@ -44,4 +44,4 @@ default['nginx']['source']['modules']  = %w[
                                            nginx::http_stub_status_module
                                            nginx::http_sub_module
                                          ]
-default['nginx']['source']['use_existing_user'] = false
+default['nginx']['source']['use_existing_user'] = true
