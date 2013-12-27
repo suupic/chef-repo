@@ -21,6 +21,7 @@
 # Calculate variables that depend on jdk_version
 # If you need to override this in an attribute file you must use
 # force_default or higher precedence.
+puts "begin install java"
 case node['platform_family']
 when "rhel", "fedora"
   node.default['java']['java_home'] = "/usr/lib/jvm/java"

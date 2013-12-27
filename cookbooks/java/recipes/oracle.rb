@@ -49,7 +49,7 @@ java_ark "jdk" do
   checksum tarball_checksum
   app_home java_home
   bin_cmds bin_cmds
-  alternatives_priority 1062
+  alternatives_priority 2000
   action :install
 end
 
