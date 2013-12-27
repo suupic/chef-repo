@@ -12,6 +12,9 @@ plugin_path = "#{jenkins_home}/plugins"
 plugin_repo = "http://updates.jenkins-ci.org/latest/"
 plugins = ['gradle','git','greenballs']
 
+include_recipe "default_env"
+#include_recipe "java"
+
 bash "setup_jenkins_repo" do
   if ::File.exists?("/etc/yum.repos.d/jenkins.repo")
     action :nothing
@@ -30,6 +33,14 @@ yum_package "jenkins" do
   else
     action :nothing
   end
+end
+
+directory "/var/lib/jenkins/plugins" do
+  owner "jenkins"
+  group "jenkins"
+  recursive true
+  mode 0755
+  action :create
 end
 
 plugins.each do |plugin|

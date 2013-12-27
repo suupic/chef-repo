@@ -32,3 +32,17 @@ profile_configs.each do |conf|
     end
   end
 end
+
+
+def install_package(name)
+  yum_package name do
+    if `rpm -qa | grep #{name}`.empty?
+      action :install
+    else
+      action :nothing
+    end
+  end
+end
+
+install_package "wget"
+install_package "yum"
