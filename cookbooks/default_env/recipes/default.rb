@@ -46,3 +46,6 @@ end
 
 install_package "wget"
 install_package "yum"
+install_package "unzip"
+install_package "lrzsz"
+install_package "dstat"

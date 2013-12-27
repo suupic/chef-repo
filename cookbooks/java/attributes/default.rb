@@ -21,20 +21,12 @@
 default['java']['remove_deprecated_packages'] = false
 
 # default jdk attributes
-default['java']['jdk_version'] = '6'
+default['java']['jdk_version'] = '7'
 default['java']['arch'] = kernel['machine'] =~ /x86_64/ ? "x86_64" : "i586"
 default['java']['openjdk_packages'] = []
-default['java']['accept_license_agreement'] = false
+default['java']['accept_license_agreement'] = true
 
-case node['platform_family']
-when "windows"
-  default['java']['install_flavor'] = "windows"
-  default['java']['windows']['url'] = nil
-  default['java']['windows']['checksum'] = nil
-  default['java']['windows']['package_name'] = "Java(TM) SE Development Kit 7 (64-bit)"
-else
-  default['java']['install_flavor'] = "openjdk"
-end
+default['java']['install_flavor'] = "oracle"
 
 case node['java']['install_flavor']
 when 'ibm', 'ibm_tar'
@@ -55,7 +47,7 @@ when 'oracle_rpm'
 end
 
 # if you change this to true, you can download directly from Oracle
-default['java']['oracle']['accept_oracle_download_terms'] = false
+default['java']['oracle']['accept_oracle_download_terms'] = true
 
 # direct download paths for oracle, you have been warned!
 
@@ -86,8 +78,8 @@ default['java']['jdk']['7']['bin_cmds'] = [ "appletviewer", "apt", "ControlPanel
 # Official checksums for the latest release can be found at http://www.oracle.com/technetwork/java/javase/downloads/java-se-binaries-checksum-1956892.html
 
 # x86_64
-default['java']['jdk']['7']['x86_64']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/7u45-b18/jdk-7u45-linux-x64.tar.gz'
-default['java']['jdk']['7']['x86_64']['checksum'] = 'bea330fcbcff77d31878f21753e09b30'
+default['java']['jdk']['7']['x86_64']['url'] = 'http://www.java.net/download/jdk7u60/archive/b02/binaries/jdk-7u60-ea-bin-b02-linux-x64-18_dec_2013.tar.gz'
+default['java']['jdk']['7']['x86_64']['checksum'] = '86726b89b1f4cd232eaa251c74ecc58e'
 
 # i586
 default['java']['jdk']['7']['i586']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/7u45-b18/jdk-7u45-linux-i586.tar.gz'
