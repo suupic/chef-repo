@@ -71,3 +71,7 @@ template "#{node['php']['conf_dir']}/php.ini" do
   end
   variables(:directives => node['php']['directives'])
 end
+
+node['php']['ext_modules'].each do |ext|
+  include_recipe "php::module_#{ext}"
+end

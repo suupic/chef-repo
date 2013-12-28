@@ -21,13 +21,9 @@
 
 case node['platform_family']
 when 'rhel', 'fedora'
-  %w{ zlib-devel }.each do |pkg|
-    package pkg do
-      action :install
-    end
-  end
   php_pear 'memcache' do
     action :install
+    preferred_state 'stable'
     # directives(:shm_size => "128M", :enable_cli => 0)
   end
 when 'debian'

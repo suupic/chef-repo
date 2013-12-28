@@ -9,8 +9,8 @@ depends 'build-essential'
 depends 'xml'
 depends 'mysql'
 depends 'yum-epel'
-depends 'windows'
-depends 'iis'
+#depends 'windows'
+#depends 'iis'
 
 %w{ debian ubuntu centos redhat fedora scientific amazon windows }.each do |os|
   supports os
@@ -29,3 +29,6 @@ recipe 'php::module_memcache', 'Install the php5-memcache package'
 recipe 'php::module_mysql', 'Install the php5-mysql package'
 recipe 'php::module_pgsql', 'Install the php5-pgsql packag'
 recipe 'php::module_sqlite3', 'Install the php5-sqlite3 package'
+recipe 'php::module_redis', 'Install the php5-redis package'
+recipe 'php::module_mongo', 'Install the php5-mongo package'
+recipe 'php::module_mcrypt', 'Install the php5-mcrypt package'

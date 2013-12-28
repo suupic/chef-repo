@@ -1,9 +1,10 @@
 #
-# Author:: Kendrick Martin (kendrick.martin@webtrends.com>)
-# Cookbook Name:: iis
-# Resource:: app
+# Author::  Joshua Timberman (<joshua@opscode.com>)
+# Author::  Seth Chisamore (<schisamo@opscode.com>)
+# Cookbook Name:: php
+# Recipe:: module_mongo
 #
-# Copyright:: 2011, Webtrends Inc.
+# Copyright 2009-2011, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,16 +19,14 @@
 # limitations under the License.
 #
 
-actions :add, :delete, :config
-
-attribute :app_name, :kind_of => String, :name_attribute => true
-attribute :path, :kind_of => String, :default => '/'
-attribute :application_pool, :kind_of => String
-attribute :physical_path, :kind_of => String
-attribute :enabled_protocols, :kind_of => String
-attr_accessor :exists, :running
-
-def initialize(*args)
-  super
-  @action = :add
+case node['platform_family']
+when 'rhel', 'fedora'
+  php_pear 'mongo' do
+    action :install
+    # directives(:shm_size => "128M", :enable_cli => 0)
+  end
+when 'debian'
+  package 'php5-mongo' do
+    action :install
+  end
 end

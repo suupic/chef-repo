@@ -1,9 +1,10 @@
 #
-# Author:: Seth Chisamore (<schisamo@opscode.com>)
-# Cookbook Name:: iis
-# Recipe:: mod_compress_static
+# Author::  Joshua Timberman (<joshua@opscode.com>)
+# Author::  Seth Chisamore (<schisamo@opscode.com>)
+# Cookbook Name:: php
+# Recipe:: module_redis
 #
-# Copyright 2011, Opscode, Inc.
+# Copyright 2009-2011, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,14 +19,14 @@
 # limitations under the License.
 #
 
-include_recipe "iis"
-
-if Opscode::IIS::Helper.older_than_windows2008r2?
-  feature = 'Web-Stat-Compression'
-else
-  feature = 'IIS-HttpCompressionStatic'
-end
-
-windows_feature feature do
-  action :install
+case node['platform_family']
+when 'rhel', 'fedora'
+  php_pear 'redis' do
+    action :install
+    # directives(:shm_size => "128M", :enable_cli => 0)
+  end
+when 'debian'
+  package 'php5-redis' do
+    action :install
+  end
 end
